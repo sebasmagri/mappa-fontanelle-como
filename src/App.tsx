@@ -15,7 +15,11 @@ const iconaFontanella = new L.Icon({
   iconUrl: icona,
   iconRetinaUrl: icona,
   iconSize: new L.Point(25, 25),
-  className: 'leaflet-div-icon'
+  className: 'leaflet-div-icon',
+  shadowAnchor: [10, 18],
+      popupAnchor: [-4, -18],
+      tooltipAnchor: [13, -4],
+      iconAnchor: [18, 18]
 });
 
 function App() {
@@ -37,11 +41,11 @@ function App() {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {fontanelle.map((fontanella) => {
+          {fontanelle.map(({position, description}, idx) => {
             return (
               // @ts-ignore
-              <Marker position={fontanella.position} icon={iconaFontanella}>
-                <Popup>{fontanella.description}</Popup>
+              <Marker position={position} icon={iconaFontanella} key={idx}>
+                <Popup>{description}</Popup>
               </Marker>
             );
           })}
